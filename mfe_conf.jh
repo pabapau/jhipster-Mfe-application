@@ -1,0 +1,102 @@
+// ------------------ //
+// ---  ENTITYS  --- //
+// ------------------ //
+
+/** list off the business entitys 
+  * managed by this mfe application
+*/
+entity Businessunit {
+    code String required ,
+    name String required ,
+    description String
+    }
+
+/** Link business entitys(unit) 
+  * with User account 
+*/
+entity Businessaccount {
+    code String required ,
+    name String required ,
+    description String
+    }
+enum Accounttype {  // à poursuivre
+    TRF ("Linked 2 site"),
+    CONF ("For mfe conf usage"),
+    GUI  ("For consulting usage")
+}
+/** More informations about users
+  * without changing nativ user "entity  
+*/
+entity Useraccount { // ! à poursuivre 
+	name String required ,
+    accounttype Accounttype required,
+    description String ,
+    usernode String required , 
+    creationdate LocalDate required ,
+    lastupdated LocalDate required 
+// à lier a businessaccount si GUI
+// à lier a site si TRF
+}
+
+/** type on site determining 
+  * role of him in transfert usecase
+*/
+enum Sitetype {
+    INT ("Application site"),
+    EXT ("External site"),
+    USR ("Site for users usage"),
+    NODE ("Site for monitor") 
+
+}
+
+/** state to determine the build 'deployement'
+  * status off some components (sites,flows,...)
+*/
+enum Buildstate {
+    NOTBUILD, REQUIRED, BUILDING, ERROR , BUILDED 
+}
+
+entity Site {
+	name String required ,
+    sitetype Sitetype required,
+    description String ,
+    sitenode String required , 
+    creationdate LocalDate required ,
+    lastupdated LocalDate required ,
+    buildstate Buildstate ,
+    buildcount Integer
+    buildcomment String
+}
+
+// ------------------ //
+// -- RELATIONSHIP -- //
+// ------------------ //
+
+
+relationship ManyToOne {
+    Useraccount{sitenode(name) required} to Site // 
+    Useraccount{user(login) required} to User
+    Site{businessaccount(code) required } to Businessaccount
+}
+
+relationship ManyToMany {
+    Useraccount{code(name) required } to Businessaccount
+}
+// ------------------ //
+// ----- OPTIONS ---- //
+// ------------------ //
+// Set pagination options
+paginate all with infinite-scroll
+paginate Site with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// ------------------ //
+// ---  SERVICES  --- //
+// ------------------ //
+// Set service options to all except few
+service all with serviceImpl  // except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
