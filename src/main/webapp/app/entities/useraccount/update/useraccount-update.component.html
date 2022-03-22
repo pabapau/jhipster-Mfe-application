@@ -1,0 +1,175 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-useraccount-heading"
+        data-cy="UseraccountCreateUpdateHeading"
+        jhiTranslate="jhipsterMfeApplicationApp.useraccount.home.createOrEditLabel"
+      >
+        Create or edit a Useraccount
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.useraccount.accounttype" for="field_accounttype"
+            >Accounttype</label
+          >
+          <select class="form-control" name="accounttype" formControlName="accounttype" id="field_accounttype" data-cy="accounttype">
+            <option [ngValue]="null">{{ 'jhipsterMfeApplicationApp.Accounttype.null' | translate }}</option>
+            <option *ngFor="let accounttype of accounttypeValues" [value]="accounttype">
+              {{ 'jhipsterMfeApplicationApp.Accounttype.' + accounttype | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('accounttype')!.invalid && (editForm.get('accounttype')!.dirty || editForm.get('accounttype')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accounttype')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.useraccount.comment" for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.useraccount.creationdate" for="field_creationdate"
+            >Creationdate</label
+          >
+          <div class="input-group">
+            <input
+              id="field_creationdate"
+              data-cy="creationdate"
+              type="text"
+              class="form-control"
+              name="creationdate"
+              ngbDatepicker
+              #creationdateDp="ngbDatepicker"
+              formControlName="creationdate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="creationdateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="editForm.get('creationdate')!.invalid && (editForm.get('creationdate')!.dirty || editForm.get('creationdate')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('creationdate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.useraccount.lastupdated" for="field_lastupdated"
+            >Lastupdated</label
+          >
+          <div class="input-group">
+            <input
+              id="field_lastupdated"
+              data-cy="lastupdated"
+              type="text"
+              class="form-control"
+              name="lastupdated"
+              ngbDatepicker
+              #lastupdatedDp="ngbDatepicker"
+              formControlName="lastupdated"
+            />
+            <button type="button" class="btn btn-secondary" (click)="lastupdatedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div *ngIf="editForm.get('lastupdated')!.invalid && (editForm.get('lastupdated')!.dirty || editForm.get('lastupdated')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lastupdated')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.useraccount.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option *ngIf="!editForm.get('user')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['user'])!.invalid && (editForm.get(['user'])!.dirty || editForm.get(['user'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['user'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="jhipsterMfeApplicationApp.useraccount.businessunit" for="field_businessunits">Businessunit</label>
+          <select
+            class="form-control"
+            id="field_businessunits"
+            data-cy="businessunit"
+            multiple
+            name="businessunits"
+            formControlName="businessunits"
+          >
+            <option
+              [ngValue]="getSelectedBusinessunit(businessunitOption, editForm.get('businessunits')!.value)"
+              *ngFor="let businessunitOption of businessunitsSharedCollection; trackBy: trackBusinessunitById"
+            >
+              {{ businessunitOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="jhipsterMfeApplicationApp.useraccount.sites" for="field_sites">Sites</label>
+          <select class="form-control" id="field_sites" data-cy="sites" multiple name="sites" formControlName="sites">
+            <option
+              [ngValue]="getSelectedSite(siteOption, editForm.get('sites')!.value)"
+              *ngFor="let siteOption of sitesSharedCollection; trackBy: trackSiteById"
+            >
+              {{ siteOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

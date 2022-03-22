@@ -1,0 +1,30 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "useraccount": {
+      "home": {
+        "title": "Useraccounts",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Useraccount",
+        "createOrEditLabel": "Créer ou éditer un Useraccount",
+        "notFound": "Aucun Useraccount trouvé"
+      },
+      "created": "Un nouveau Useraccount a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Useraccount avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Useraccount avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Useraccount {{ id }} ?"
+      },
+      "detail": {
+        "title": "Useraccount"
+      },
+      "id": "ID",
+      "accounttype": "Accounttype",
+      "comment": "Comment",
+      "creationdate": "Creationdate",
+      "lastupdated": "Lastupdated",
+      "user": "User",
+      "businessunit": "Businessunit",
+      "sites": "Sites"
+    }
+  }
+}

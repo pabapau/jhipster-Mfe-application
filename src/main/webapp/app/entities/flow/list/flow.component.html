@@ -1,0 +1,122 @@
+<div>
+  <h2 id="page-heading" data-cy="FlowHeading">
+    <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.title">Flows</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-flow"
+        [routerLink]="['/flow/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.createLabel"> Create a new Flow </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="flows?.length === 0">
+    <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.notFound">No flows found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="flows && flows.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fileIdent">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.fileIdent">File Ident</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="flowusecase">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.flowusecase">Flowusecase</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="creationdate">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.creationdate">Creationdate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastupdated">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.lastupdated">Lastupdated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildstate">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.buildstate">Buildstate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildcount">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.buildcount">Buildcount</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildcomment">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.buildcomment">Buildcomment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="businessunit.code">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.businessunit">Businessunit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="origin.name">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.origin">Origin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="destination.name">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.destination">Destination</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let flow of flows; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/flow', flow.id, 'view']">{{ flow.id }}</a>
+          </td>
+          <td>{{ flow.fileIdent }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.Flowusecase.' + flow.flowusecase }}">{{ flow.flowusecase }}</td>
+          <td>{{ flow.description }}</td>
+          <td>{{ flow.creationdate | formatMediumDate }}</td>
+          <td>{{ flow.lastupdated | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.Buildstate.' + flow.buildstate }}">{{ flow.buildstate }}</td>
+          <td>{{ flow.buildcount }}</td>
+          <td>{{ flow.buildcomment }}</td>
+          <td>
+            <div *ngIf="flow.businessunit">
+              <a [routerLink]="['/businessunit', flow.businessunit?.id, 'view']">{{ flow.businessunit?.code }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="flow.origin">
+              <a [routerLink]="['/site', flow.origin?.id, 'view']">{{ flow.origin?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="flow.destination">
+              <a [routerLink]="['/site', flow.destination?.id, 'view']">{{ flow.destination?.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/flow', flow.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/flow', flow.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(flow)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

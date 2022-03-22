@@ -1,0 +1,195 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-x-prot-heading" data-cy="XProtCreateUpdateHeading" jhiTranslate="jhipsterMfeApplicationApp.xProt.home.createOrEditLabel">
+        Create or edit a X Prot
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.xprottype" for="field_xprottype">Xprottype</label>
+          <select class="form-control" name="xprottype" formControlName="xprottype" id="field_xprottype" data-cy="xprottype">
+            <option [ngValue]="null">{{ 'jhipsterMfeApplicationApp.XProttype.null' | translate }}</option>
+            <option *ngFor="let xProttype of xProttypeValues" [value]="xProttype">
+              {{ 'jhipsterMfeApplicationApp.XProttype.' + xProttype | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('xprottype')!.invalid && (editForm.get('xprottype')!.dirty || editForm.get('xprottype')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('xprottype')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.xrole" for="field_xrole">Xrole</label>
+          <select class="form-control" name="xrole" formControlName="xrole" id="field_xrole" data-cy="xrole">
+            <option [ngValue]="null">{{ 'jhipsterMfeApplicationApp.Xrole.null' | translate }}</option>
+            <option *ngFor="let xrole of xroleValues" [value]="xrole">{{ 'jhipsterMfeApplicationApp.Xrole.' + xrole | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('xrole')!.invalid && (editForm.get('xrole')!.dirty || editForm.get('xrole')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('xrole')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.comment" for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.accessAddress" for="field_accessAddress"
+            >Access Address</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accessAddress"
+            id="field_accessAddress"
+            data-cy="accessAddress"
+            formControlName="accessAddress"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.accessServicePoint" for="field_accessServicePoint"
+            >Access Service Point</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accessServicePoint"
+            id="field_accessServicePoint"
+            data-cy="accessServicePoint"
+            formControlName="accessServicePoint"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.creationdate" for="field_creationdate"
+            >Creationdate</label
+          >
+          <div class="input-group">
+            <input
+              id="field_creationdate"
+              data-cy="creationdate"
+              type="text"
+              class="form-control"
+              name="creationdate"
+              ngbDatepicker
+              #creationdateDp="ngbDatepicker"
+              formControlName="creationdate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="creationdateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="editForm.get('creationdate')!.invalid && (editForm.get('creationdate')!.dirty || editForm.get('creationdate')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('creationdate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.lastupdated" for="field_lastupdated">Lastupdated</label>
+          <div class="input-group">
+            <input
+              id="field_lastupdated"
+              data-cy="lastupdated"
+              type="text"
+              class="form-control"
+              name="lastupdated"
+              ngbDatepicker
+              #lastupdatedDp="ngbDatepicker"
+              formControlName="lastupdated"
+            />
+            <button type="button" class="btn btn-secondary" (click)="lastupdatedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div *ngIf="editForm.get('lastupdated')!.invalid && (editForm.get('lastupdated')!.dirty || editForm.get('lastupdated')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lastupdated')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.buildstate" for="field_buildstate">Buildstate</label>
+          <select class="form-control" name="buildstate" formControlName="buildstate" id="field_buildstate" data-cy="buildstate">
+            <option [ngValue]="null">{{ 'jhipsterMfeApplicationApp.Buildstate.null' | translate }}</option>
+            <option *ngFor="let buildstate of buildstateValues" [value]="buildstate">
+              {{ 'jhipsterMfeApplicationApp.Buildstate.' + buildstate | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.buildcount" for="field_buildcount">Buildcount</label>
+          <input
+            type="number"
+            class="form-control"
+            name="buildcount"
+            id="field_buildcount"
+            data-cy="buildcount"
+            formControlName="buildcount"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.xProt.buildcomment" for="field_buildcomment"
+            >Buildcomment</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="buildcomment"
+            id="field_buildcomment"
+            data-cy="buildcomment"
+            formControlName="buildcomment"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

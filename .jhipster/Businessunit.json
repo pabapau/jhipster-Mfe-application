@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220322113913",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "businessunit",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "list off the business entitys\\nmanaged by this mfe application",
+  "jpaMetamodelFiltering": false,
+  "name": "Businessunit",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "useraccount",
+      "otherEntityRelationshipName": "businessunit",
+      "ownerSide": false,
+      "relationshipName": "useraccount",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,61 @@
+{
+  "applications": "*",
+  "changelogDate": "20220322113914",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "useraccount",
+  "fields": [
+    {
+      "fieldName": "accounttype",
+      "fieldType": "Accounttype",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TRF (Linked 2 site),CONF (For mfe conf usage),GUI (For consulting usage)"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creationdate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastupdated",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "More informations about users\\nwithout changing nativ user \"entity",
+  "jpaMetamodelFiltering": false,
+  "name": "Useraccount",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "useraccount",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "businessunit",
+      "otherEntityRelationshipName": "useraccount",
+      "ownerSide": true,
+      "relationshipName": "businessunit",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "site",
+      "otherEntityRelationshipName": "accountedfor",
+      "ownerSide": true,
+      "relationshipName": "sites",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,33 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "xProt": {
+      "home": {
+        "title": "X Prots",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new X Prot",
+        "createOrEditLabel": "Create or edit a X Prot",
+        "notFound": "No X Prots found"
+      },
+      "created": "A new X Prot is created with identifier {{ param }}",
+      "updated": "A X Prot is updated with identifier {{ param }}",
+      "deleted": "A X Prot is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete X Prot {{ id }}?"
+      },
+      "detail": {
+        "title": "X Prot"
+      },
+      "id": "ID",
+      "xprottype": "Xprottype",
+      "xrole": "Xrole",
+      "comment": "Comment",
+      "accessAddress": "Access Address",
+      "accessServicePoint": "Access Service Point",
+      "creationdate": "Creationdate",
+      "lastupdated": "Lastupdated",
+      "buildstate": "Buildstate",
+      "buildcount": "Buildcount",
+      "buildcomment": "Buildcomment"
+    }
+  }
+}

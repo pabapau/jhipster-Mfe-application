@@ -1,0 +1,77 @@
+{
+  "applications": "*",
+  "changelogDate": "20220322113915",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "site",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sitetype",
+      "fieldType": "Sitetype",
+      "fieldTypeJavadoc": "type on site determining\\nrole of him in transfert usecase",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "INT (Application site),EXT (External site),USR (Site for users usage),NODE (Site for monitor)"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sitenode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "creationdate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastupdated",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "buildstate",
+      "fieldType": "Buildstate",
+      "fieldTypeJavadoc": "state to determine the build 'deployement'\\nstatus off some components (sites,flows,...)",
+      "fieldValues": "NOTBUILD,REQUIRED,BUILDING,ERROR,BUILDED,TODESTROY,DESTROYED"
+    },
+    {
+      "fieldName": "buildcount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "buildcomment",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Site",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "businessunit",
+      "otherEntityRelationshipName": "site",
+      "relationshipName": "businessunit",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "useraccount",
+      "otherEntityRelationshipName": "sites",
+      "ownerSide": false,
+      "relationshipName": "accountedfor",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

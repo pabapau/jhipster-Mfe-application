@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Useraccount.
+    -->
+    <changeSet id="20220322113914-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="useraccount"
+                                 constraintName="fk_useraccount__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="useraccount_id"
+                                 baseTableName="rel_useraccount__businessunit"
+                                 constraintName="fk_rel_useraccount__businessunit__useraccount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="useraccount"/>
+
+        <addForeignKeyConstraint baseColumnNames="businessunit_id"
+                                 baseTableName="rel_useraccount__businessunit"
+                                 constraintName="fk_rel_useraccount__businessunit__businessunit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="businessunit"/>
+
+        <addForeignKeyConstraint baseColumnNames="useraccount_id"
+                                 baseTableName="rel_useraccount__sites"
+                                 constraintName="fk_rel_useraccount__sites__useraccount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="useraccount"/>
+
+        <addForeignKeyConstraint baseColumnNames="sites_id"
+                                 baseTableName="rel_useraccount__sites"
+                                 constraintName="fk_rel_useraccount__sites__sites_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="site"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "businessunit": {
+      "home": {
+        "title": "Businessunits",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Businessunit",
+        "createOrEditLabel": "Create or edit a Businessunit",
+        "notFound": "No Businessunits found"
+      },
+      "created": "A new Businessunit is created with identifier {{ param }}",
+      "updated": "A Businessunit is updated with identifier {{ param }}",
+      "deleted": "A Businessunit is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Businessunit {{ id }}?"
+      },
+      "detail": {
+        "title": "Businessunit"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "useraccount": "Useraccount"
+    }
+  }
+}

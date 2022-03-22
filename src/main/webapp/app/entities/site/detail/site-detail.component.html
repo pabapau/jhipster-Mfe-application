@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="site">
+      <h2 data-cy="siteDetailsHeading"><span jhiTranslate="jhipsterMfeApplicationApp.site.detail.title">Site</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ site.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.name">Name</span></dt>
+        <dd>
+          <span>{{ site.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.sitetype">Sitetype</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.Sitetype.' + site.sitetype }}">{{ site.sitetype }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.description">Description</span></dt>
+        <dd>
+          <span>{{ site.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.sitenode">Sitenode</span></dt>
+        <dd>
+          <span>{{ site.sitenode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.creationdate">Creationdate</span></dt>
+        <dd>
+          <span>{{ site.creationdate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.lastupdated">Lastupdated</span></dt>
+        <dd>
+          <span>{{ site.lastupdated | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.buildstate">Buildstate</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.Buildstate.' + site.buildstate }}">{{ site.buildstate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.buildcount">Buildcount</span></dt>
+        <dd>
+          <span>{{ site.buildcount }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.buildcomment">Buildcomment</span></dt>
+        <dd>
+          <span>{{ site.buildcomment }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.site.businessunit">Businessunit</span></dt>
+        <dd>
+          <div *ngIf="site.businessunit">
+            <a [routerLink]="['/businessunit', site.businessunit?.id, 'view']">{{ site.businessunit?.code }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/site', site.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+export enum Buildstate {
+  NOTBUILD = 'NOTBUILD',
+
+  REQUIRED = 'REQUIRED',
+
+  BUILDING = 'BUILDING',
+
+  ERROR = 'ERROR',
+
+  BUILDED = 'BUILDED',
+
+  TODESTROY = 'TODESTROY',
+
+  DESTROYED = 'DESTROYED',
+}

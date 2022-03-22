@@ -1,0 +1,107 @@
+<div>
+  <h2 id="page-heading" data-cy="XProtHeading">
+    <span jhiTranslate="jhipsterMfeApplicationApp.xProt.home.title">X Prots</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.xProt.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-x-prot"
+        [routerLink]="['/x-prot/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.xProt.home.createLabel"> Create a new X Prot </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="xProts?.length === 0">
+    <span jhiTranslate="jhipsterMfeApplicationApp.xProt.home.notFound">No xProts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="xProts && xProts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="xprottype">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.xprottype">Xprottype</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="xrole">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.xrole">Xrole</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="comment">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accessAddress">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.accessAddress">Access Address</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accessServicePoint">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.accessServicePoint">Access Service Point</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="creationdate">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.creationdate">Creationdate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastupdated">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.lastupdated">Lastupdated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildstate">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.buildstate">Buildstate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildcount">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.buildcount">Buildcount</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildcomment">
+            <span jhiTranslate="jhipsterMfeApplicationApp.xProt.buildcomment">Buildcomment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let xProt of xProts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/x-prot', xProt.id, 'view']">{{ xProt.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.XProttype.' + xProt.xprottype }}">{{ xProt.xprottype }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.Xrole.' + xProt.xrole }}">{{ xProt.xrole }}</td>
+          <td>{{ xProt.comment }}</td>
+          <td>{{ xProt.accessAddress }}</td>
+          <td>{{ xProt.accessServicePoint }}</td>
+          <td>{{ xProt.creationdate | formatMediumDate }}</td>
+          <td>{{ xProt.lastupdated | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.Buildstate.' + xProt.buildstate }}">{{ xProt.buildstate }}</td>
+          <td>{{ xProt.buildcount }}</td>
+          <td>{{ xProt.buildcomment }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/x-prot', xProt.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/x-prot', xProt.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(xProt)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
