@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="userAccount">
+      <h2 data-cy="userAccountDetailsHeading">
+        <span jhiTranslate="jhipsterMfeApplicationApp.userAccount.detail.title">User Account</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ userAccount.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.userAccount.accountType">Account Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.AccountType.' + userAccount.accountType }}">{{ userAccount.accountType }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.userAccount.comment">Comment</span></dt>
+        <dd>
+          <span>{{ userAccount.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.userAccount.creationDate">Creation Date</span></dt>
+        <dd>
+          <span>{{ userAccount.creationDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.userAccount.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ userAccount.lastUpdated | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.userAccount.user">User</span></dt>
+        <dd>
+          <span>{{ userAccount.user?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.userAccount.businessUnit">Business Unit</span></dt>
+        <dd>
+          <span *ngFor="let businessUnit of userAccount.businessUnits; let last = last">
+            <a [routerLink]="['/business-unit', businessUnit?.id, 'view']">{{ businessUnit.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.userAccount.sites">Sites</span></dt>
+        <dd>
+          <span *ngFor="let sites of userAccount.sites; let last = last">
+            <a [routerLink]="['/site', sites?.id, 'view']">{{ sites.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/user-account', userAccount.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

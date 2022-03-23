@@ -1,0 +1,247 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-flow-heading" data-cy="FlowCreateUpdateHeading" jhiTranslate="jhipsterMfeApplicationApp.flow.home.createOrEditLabel">
+        Create or edit a Flow
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.fileIdent" for="field_fileIdent">File Ident</label>
+          <input type="text" class="form-control" name="fileIdent" id="field_fileIdent" data-cy="fileIdent" formControlName="fileIdent" />
+          <div *ngIf="editForm.get('fileIdent')!.invalid && (editForm.get('fileIdent')!.dirty || editForm.get('fileIdent')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fileIdent')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.flowUseCase" for="field_flowUseCase">Flow Use Case</label>
+          <select class="form-control" name="flowUseCase" formControlName="flowUseCase" id="field_flowUseCase" data-cy="flowUseCase">
+            <option [ngValue]="null">{{ 'jhipsterMfeApplicationApp.FlowUseCase.null' | translate }}</option>
+            <option *ngFor="let flowUseCase of flowUseCaseValues" [value]="flowUseCase">
+              {{ 'jhipsterMfeApplicationApp.FlowUseCase.' + flowUseCase | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('flowUseCase')!.invalid && (editForm.get('flowUseCase')!.dirty || editForm.get('flowUseCase')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('flowUseCase')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.creationDate" for="field_creationDate"
+            >Creation Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_creationDate"
+              data-cy="creationDate"
+              type="text"
+              class="form-control"
+              name="creationDate"
+              ngbDatepicker
+              #creationDateDp="ngbDatepicker"
+              formControlName="creationDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="creationDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="editForm.get('creationDate')!.invalid && (editForm.get('creationDate')!.dirty || editForm.get('creationDate')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('creationDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.lastUpdated" for="field_lastUpdated">Last Updated</label>
+          <div class="input-group">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="text"
+              class="form-control"
+              name="lastUpdated"
+              ngbDatepicker
+              #lastUpdatedDp="ngbDatepicker"
+              formControlName="lastUpdated"
+            />
+            <button type="button" class="btn btn-secondary" (click)="lastUpdatedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div *ngIf="editForm.get('lastUpdated')!.invalid && (editForm.get('lastUpdated')!.dirty || editForm.get('lastUpdated')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lastUpdated')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.buildState" for="field_buildState">Build State</label>
+          <select class="form-control" name="buildState" formControlName="buildState" id="field_buildState" data-cy="buildState">
+            <option [ngValue]="null">{{ 'jhipsterMfeApplicationApp.BuildState.null' | translate }}</option>
+            <option *ngFor="let buildState of buildStateValues" [value]="buildState">
+              {{ 'jhipsterMfeApplicationApp.BuildState.' + buildState | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.buildCount" for="field_buildCount">Build Count</label>
+          <input
+            type="number"
+            class="form-control"
+            name="buildCount"
+            id="field_buildCount"
+            data-cy="buildCount"
+            formControlName="buildCount"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.buildComment" for="field_buildComment"
+            >Build Comment</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="buildComment"
+            id="field_buildComment"
+            data-cy="buildComment"
+            formControlName="buildComment"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.businessUnit" for="field_businessUnit"
+            >Business Unit</label
+          >
+          <select class="form-control" id="field_businessUnit" data-cy="businessUnit" name="businessUnit" formControlName="businessUnit">
+            <option *ngIf="!editForm.get('businessUnit')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                businessUnitOption.id === editForm.get('businessUnit')!.value?.id ? editForm.get('businessUnit')!.value : businessUnitOption
+              "
+              *ngFor="let businessUnitOption of businessUnitsSharedCollection; trackBy: trackBusinessUnitById"
+            >
+              {{ businessUnitOption.code }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['businessUnit'])!.invalid && (editForm.get(['businessUnit'])!.dirty || editForm.get(['businessUnit'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['businessUnit'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.origin" for="field_origin">Origin</label>
+          <select class="form-control" id="field_origin" data-cy="origin" name="origin" formControlName="origin">
+            <option *ngIf="!editForm.get('origin')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="siteOption.id === editForm.get('origin')!.value?.id ? editForm.get('origin')!.value : siteOption"
+              *ngFor="let siteOption of sitesSharedCollection; trackBy: trackSiteById"
+            >
+              {{ siteOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['origin'])!.invalid && (editForm.get(['origin'])!.dirty || editForm.get(['origin'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['origin'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterMfeApplicationApp.flow.destination" for="field_destination">Destination</label>
+          <select class="form-control" id="field_destination" data-cy="destination" name="destination" formControlName="destination">
+            <option *ngIf="!editForm.get('destination')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="siteOption.id === editForm.get('destination')!.value?.id ? editForm.get('destination')!.value : siteOption"
+              *ngFor="let siteOption of sitesSharedCollection; trackBy: trackSiteById"
+            >
+              {{ siteOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['destination'])!.invalid && (editForm.get(['destination'])!.dirty || editForm.get(['destination'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['destination'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

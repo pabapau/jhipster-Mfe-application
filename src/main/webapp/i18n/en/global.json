@@ -7,6 +7,11 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "businessUnit": "Business Unit",
+        "userAccount": "User Account",
+        "site": "Site",
+        "xProt": "X Prot",
+        "flow": "Flow",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

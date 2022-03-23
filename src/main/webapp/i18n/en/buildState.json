@@ -1,0 +1,14 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "BuildState": {
+      "null": "",
+      "NOTBUILD": "NOTBUILD",
+      "REQUIRED": "REQUIRED",
+      "BUILDING": "BUILDING",
+      "BUILDERROR": "BUILDERROR",
+      "BUILDED": "BUILDED",
+      "TODESTROY": "TODESTROY",
+      "DESTROYED": "DESTROYED"
+    }
+  }
+}

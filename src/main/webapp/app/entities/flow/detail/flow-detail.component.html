@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="flow">
+      <h2 data-cy="flowDetailsHeading"><span jhiTranslate="jhipsterMfeApplicationApp.flow.detail.title">Flow</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ flow.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.fileIdent">File Ident</span></dt>
+        <dd>
+          <span>{{ flow.fileIdent }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.flowUseCase">Flow Use Case</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.FlowUseCase.' + flow.flowUseCase }}">{{ flow.flowUseCase }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.description">Description</span></dt>
+        <dd>
+          <span>{{ flow.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.creationDate">Creation Date</span></dt>
+        <dd>
+          <span>{{ flow.creationDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ flow.lastUpdated | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.buildState">Build State</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.BuildState.' + flow.buildState }}">{{ flow.buildState }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.buildCount">Build Count</span></dt>
+        <dd>
+          <span>{{ flow.buildCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.buildComment">Build Comment</span></dt>
+        <dd>
+          <span>{{ flow.buildComment }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.businessUnit">Business Unit</span></dt>
+        <dd>
+          <div *ngIf="flow.businessUnit">
+            <a [routerLink]="['/business-unit', flow.businessUnit?.id, 'view']">{{ flow.businessUnit?.code }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.origin">Origin</span></dt>
+        <dd>
+          <div *ngIf="flow.origin">
+            <a [routerLink]="['/site', flow.origin?.id, 'view']">{{ flow.origin?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.flow.destination">Destination</span></dt>
+        <dd>
+          <div *ngIf="flow.destination">
+            <a [routerLink]="['/site', flow.destination?.id, 'view']">{{ flow.destination?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/flow', flow.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
