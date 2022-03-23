@@ -1,0 +1,72 @@
+{
+  "applications": "*",
+  "changelogDate": "20220323170558",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "x_prot",
+  "fields": [
+    {
+      "fieldName": "xprotType",
+      "fieldType": "XProtType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PESITANY (pesit cft),PESITSSL (pesit ssl cft),SFTP (sftp)"
+    },
+    {
+      "fieldName": "xRole",
+      "fieldType": "XRole",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CLI (client),SRV (serveur)"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accessAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accessServicePoint",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "buildState",
+      "fieldType": "BuildState",
+      "fieldTypeJavadoc": "state to determine the build 'deployement'\\nstatus off some CONFigurations components (sites,flows,...)",
+      "fieldValues": "NOTBUILD,REQUIRED,BUILDING,BUILDERROR,BUILDED,TODESTROY,DESTROYED"
+    },
+    {
+      "fieldName": "buildCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "buildComment",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "XProt",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "site",
+      "otherEntityRelationshipName": "xProt",
+      "relationshipName": "onNode",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

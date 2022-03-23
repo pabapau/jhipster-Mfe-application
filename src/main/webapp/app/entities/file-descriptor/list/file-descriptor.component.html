@@ -1,0 +1,118 @@
+<div>
+  <h2 id="page-heading" data-cy="FileDescriptorHeading">
+    <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.home.title">File Descriptors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-file-descriptor"
+        [routerLink]="['/file-descriptor/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.home.createLabel"> Create a new File Descriptor </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="fileDescriptors?.length === 0">
+    <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.home.notFound">No fileDescriptors found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="fileDescriptors && fileDescriptors.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fileIdent">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.fileIdent">File Ident</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="flowUseCase">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.flowUseCase">Flow Use Case</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="creationDate">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastUpdated">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildState">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.buildState">Build State</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildCount">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.buildCount">Build Count</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildComment">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.buildComment">Build Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="flow.id">
+            <span jhiTranslate="jhipsterMfeApplicationApp.fileDescriptor.flow">Flow</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let fileDescriptor of fileDescriptors; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/file-descriptor', fileDescriptor.id, 'view']">{{ fileDescriptor.id }}</a>
+          </td>
+          <td>{{ fileDescriptor.fileIdent }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.FlowUseCase.' + fileDescriptor.flowUseCase }}">
+            {{ fileDescriptor.flowUseCase }}
+          </td>
+          <td>{{ fileDescriptor.description }}</td>
+          <td>{{ fileDescriptor.creationDate | formatMediumDate }}</td>
+          <td>{{ fileDescriptor.lastUpdated | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.BuildState.' + fileDescriptor.buildState }}">{{ fileDescriptor.buildState }}</td>
+          <td>{{ fileDescriptor.buildCount }}</td>
+          <td>{{ fileDescriptor.buildComment }}</td>
+          <td>
+            <div *ngIf="fileDescriptor.flow">
+              <a [routerLink]="['/flow', fileDescriptor.flow?.id, 'view']">{{ fileDescriptor.flow?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/file-descriptor', fileDescriptor.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/file-descriptor', fileDescriptor.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(fileDescriptor)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

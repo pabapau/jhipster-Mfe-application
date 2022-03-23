@@ -1,0 +1,10 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "XProtType": {
+      "null": "",
+      "PESITANY": "pesit cft",
+      "PESITSSL": "pesit ssl cft",
+      "SFTP": "sftp"
+    }
+  }
+}

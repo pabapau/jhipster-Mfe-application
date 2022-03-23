@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="xProt">
+      <h2 data-cy="xProtDetailsHeading"><span jhiTranslate="jhipsterMfeApplicationApp.xProt.detail.title">X Prot</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ xProt.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.xprotType">Xprot Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.XProtType.' + xProt.xprotType }}">{{ xProt.xprotType }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.xRole">X Role</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.XRole.' + xProt.xRole }}">{{ xProt.xRole }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.comment">Comment</span></dt>
+        <dd>
+          <span>{{ xProt.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.accessAddress">Access Address</span></dt>
+        <dd>
+          <span>{{ xProt.accessAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.accessServicePoint">Access Service Point</span></dt>
+        <dd>
+          <span>{{ xProt.accessServicePoint }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.creationDate">Creation Date</span></dt>
+        <dd>
+          <span>{{ xProt.creationDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ xProt.lastUpdated | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.buildState">Build State</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterMfeApplicationApp.BuildState.' + xProt.buildState }}">{{ xProt.buildState }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.buildCount">Build Count</span></dt>
+        <dd>
+          <span>{{ xProt.buildCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.buildComment">Build Comment</span></dt>
+        <dd>
+          <span>{{ xProt.buildComment }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterMfeApplicationApp.xProt.onNode">On Node</span></dt>
+        <dd>
+          <div *ngIf="xProt.onNode">
+            <a [routerLink]="['/site', xProt.onNode?.id, 'view']">{{ xProt.onNode?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/x-prot', xProt.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

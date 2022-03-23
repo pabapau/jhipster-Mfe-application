@@ -1,0 +1,78 @@
+{
+  "applications": "*",
+  "changelogDate": "20220323170557",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "site",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "siteType",
+      "fieldType": "SiteType",
+      "fieldTypeJavadoc": "type on site determining\\nrole of him in transfert usecase",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "INT (Application site),EXT (External site),USR (Site for users usage),NODE (Site for monitor)"
+    },
+    {
+      "fieldName": "osType",
+      "fieldType": "OsType",
+      "fieldValues": "WIN (WINDOWS),AIX (AIX),LNX (LINUX),ZOS (Z_OS),IBMI (IBMI5_ISERIES_AS400)"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "buildState",
+      "fieldType": "BuildState",
+      "fieldTypeJavadoc": "state to determine the build 'deployement'\\nstatus off some CONFigurations components (sites,flows,...)",
+      "fieldValues": "NOTBUILD,REQUIRED,BUILDING,BUILDERROR,BUILDED,TODESTROY,DESTROYED"
+    },
+    {
+      "fieldName": "buildCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "buildComment",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "sites are entry point whitch participate\\nto file transfert exchanges (Mfe) and represent\\napplications, physical transfert monitors,\\ngroups of users, externals partners",
+  "jpaMetamodelFiltering": false,
+  "name": "Site",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "businessUnit",
+      "otherEntityRelationshipName": "site",
+      "relationshipName": "businessUnit",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "userAccount",
+      "otherEntityRelationshipName": "sites",
+      "ownerSide": false,
+      "relationshipName": "accountedFor",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

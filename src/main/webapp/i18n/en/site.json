@@ -1,0 +1,34 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "site": {
+      "home": {
+        "title": "Sites",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Site",
+        "createOrEditLabel": "Create or edit a Site",
+        "notFound": "No Sites found"
+      },
+      "created": "A new Site is created with identifier {{ param }}",
+      "updated": "A Site is updated with identifier {{ param }}",
+      "deleted": "A Site is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Site {{ id }}?"
+      },
+      "detail": {
+        "title": "Site"
+      },
+      "id": "ID",
+      "name": "Name",
+      "siteType": "Site Type",
+      "osType": "Os Type",
+      "description": "Description",
+      "creationDate": "Creation Date",
+      "lastUpdated": "Last Updated",
+      "buildState": "Build State",
+      "buildCount": "Build Count",
+      "buildComment": "Build Comment",
+      "businessUnit": "Business Unit",
+      "accountedFor": "Accounted For"
+    }
+  }
+}

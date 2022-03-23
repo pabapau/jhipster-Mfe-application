@@ -1,0 +1,34 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "fileDescriptor": {
+      "home": {
+        "title": "File Descriptors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new File Descriptor",
+        "createOrEditLabel": "Create or edit a File Descriptor",
+        "notFound": "No File Descriptors found"
+      },
+      "created": "A new File Descriptor is created with identifier {{ param }}",
+      "updated": "A File Descriptor is updated with identifier {{ param }}",
+      "deleted": "A File Descriptor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete File Descriptor {{ id }}?"
+      },
+      "detail": {
+        "title": "File Descriptor"
+      },
+      "id": "ID",
+      "fileIdent": "File Ident",
+      "flowUseCase": "Flow Use Case",
+      "description": "Description",
+      "creationDate": "Creation Date",
+      "lastUpdated": "Last Updated",
+      "buildState": "Build State",
+      "buildCount": "Build Count",
+      "buildComment": "Build Comment",
+      "flow": "Flow",
+      "isSourceFor": "Is Source For",
+      "isDestFor": "Is Dest For"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "site": {
+      "home": {
+        "title": "Sites",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Site",
+        "createOrEditLabel": "Créer ou éditer un Site",
+        "notFound": "Aucun Site trouvé"
+      },
+      "created": "Un nouveau Site a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Site avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Site avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Site {{ id }} ?"
+      },
+      "detail": {
+        "title": "Site"
+      },
+      "id": "ID",
+      "name": "Name",
+      "siteType": "Site Type",
+      "osType": "Os Type",
+      "description": "Description",
+      "creationDate": "Creation Date",
+      "lastUpdated": "Last Updated",
+      "buildState": "Build State",
+      "buildCount": "Build Count",
+      "buildComment": "Build Comment",
+      "businessUnit": "Business Unit",
+      "accountedFor": "Accounted For"
+    }
+  }
+}

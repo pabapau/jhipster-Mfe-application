@@ -1,0 +1,158 @@
+<div>
+  <h2 id="page-heading" data-cy="FlowHeading">
+    <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.title">Flows</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-flow"
+        [routerLink]="['/flow/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.createLabel"> Create a new Flow </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="flows?.length === 0">
+    <span jhiTranslate="jhipsterMfeApplicationApp.flow.home.notFound">No flows found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="flows && flows.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fileIdent">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.fileIdent">File Ident</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="flowUseCase">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.flowUseCase">Flow Use Case</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="creationDate">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastUpdated">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildState">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.buildState">Build State</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildCount">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.buildCount">Build Count</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildComment">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.buildComment">Build Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="originFileDescriptor.id">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.originFileDescriptor">Origin File Descriptor</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="destFileDescriptor.id">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.destFileDescriptor">Dest File Descriptor</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="businessUnit.code">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.businessUnit">Business Unit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="origin.name">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.origin">Origin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="destination.name">
+            <span jhiTranslate="jhipsterMfeApplicationApp.flow.destination">Destination</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flow of flows; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/flow', flow.id, 'view']">{{ flow.id }}</a>
+          </td>
+          <td>{{ flow.fileIdent }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.FlowUseCase.' + flow.flowUseCase }}">{{ flow.flowUseCase }}</td>
+          <td>{{ flow.description }}</td>
+          <td>{{ flow.creationDate | formatMediumDate }}</td>
+          <td>{{ flow.lastUpdated | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'jhipsterMfeApplicationApp.BuildState.' + flow.buildState }}">{{ flow.buildState }}</td>
+          <td>{{ flow.buildCount }}</td>
+          <td>{{ flow.buildComment }}</td>
+          <td>
+            <div *ngIf="flow.originFileDescriptor">
+              <a [routerLink]="['/file-descriptor', flow.originFileDescriptor?.id, 'view']">{{ flow.originFileDescriptor?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="flow.destFileDescriptor">
+              <a [routerLink]="['/file-descriptor', flow.destFileDescriptor?.id, 'view']">{{ flow.destFileDescriptor?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="flow.businessUnit">
+              <a [routerLink]="['/business-unit', flow.businessUnit?.id, 'view']">{{ flow.businessUnit?.code }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="flow.origin">
+              <a [routerLink]="['/site', flow.origin?.id, 'view']">{{ flow.origin?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="flow.destination">
+              <a [routerLink]="['/site', flow.destination?.id, 'view']">{{ flow.destination?.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/flow', flow.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/flow', flow.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(flow)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="flows && flows.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

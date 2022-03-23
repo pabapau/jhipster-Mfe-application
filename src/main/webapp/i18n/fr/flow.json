@@ -1,0 +1,37 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "flow": {
+      "home": {
+        "title": "Flows",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Flow",
+        "createOrEditLabel": "Créer ou éditer un Flow",
+        "notFound": "Aucun Flow trouvé"
+      },
+      "created": "Un nouveau Flow a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Flow avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Flow avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Flow {{ id }} ?"
+      },
+      "detail": {
+        "title": "Flow"
+      },
+      "id": "ID",
+      "fileIdent": "File Ident",
+      "flowUseCase": "Flow Use Case",
+      "description": "Description",
+      "creationDate": "Creation Date",
+      "lastUpdated": "Last Updated",
+      "buildState": "Build State",
+      "buildCount": "Build Count",
+      "buildComment": "Build Comment",
+      "originFileDescriptor": "Origin File Descriptor",
+      "destFileDescriptor": "Dest File Descriptor",
+      "businessUnit": "Business Unit",
+      "origin": "Origin",
+      "destination": "Destination",
+      "fileDescriptor": "File Descriptor"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+id;name;site_type;os_type;description;creation_date;last_updated;build_state;build_count;build_comment;business_unit_id
+1;invoice;EXT;ZOS;strategy Expanded;2022-03-23;2022-03-23;NOTBUILD;94443;c payment Car;1
+2;Corse deploy;EXT;LNX;red turquoise Account;2022-03-22;2022-03-23;TODESTROY;90940;channels Bike;2
+3;Auto PCI SMTP;INT;IBMI;primary;2022-03-23;2022-03-23;NOTBUILD;4585;b;3
+4;Music;NODE;WIN;Champagne-Ardenne Cotton;2022-03-22;2022-03-23;BUILDED;97352;Agent XML;4
+5;software Taka;NODE;ZOS;Lettonie Executif;2022-03-23;2022-03-22;DESTROYED;54418;EXE Developpeur Som;5
+6;payment Jewelery;USR;WIN;virtual;2022-03-23;2022-03-23;BUILDED;66666;Salad;6
+7;Tuna Cheese Cambridgeshire;INT;WIN;Operative Shoes;2022-03-23;2022-03-23;DESTROYED;36910;Andorre Lepic;7
+8;1080p sticky;EXT;WIN;Fresh bus a;2022-03-23;2022-03-23;DESTROYED;64742;multi-byte;8
+9;Loan;NODE;WIN;RAM secured US;2022-03-22;2022-03-23;TODESTROY;30103;Languedoc-Roussillon;9
+10;panel scalable Victoire;NODE;ZOS;Sommerard;2022-03-23;2022-03-23;TODESTROY;13208;Awesome Soap Fantastic;10

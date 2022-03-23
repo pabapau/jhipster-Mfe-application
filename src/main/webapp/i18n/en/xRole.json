@@ -1,0 +1,9 @@
+{
+  "jhipsterMfeApplicationApp": {
+    "XRole": {
+      "null": "",
+      "CLI": "client",
+      "SRV": "serveur"
+    }
+  }
+}
