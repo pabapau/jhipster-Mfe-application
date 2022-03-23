@@ -1,0 +1,144 @@
+// ------------------ //
+// ---  ENTITYS  --- //
+// ------------------ //
+
+/** list off the business entitys 
+  * managed by this mfe application
+*/
+entity BusinessUnit {
+    code String required ,
+    name String required ,
+    description String
+    }
+
+
+enum AccountType {  // equiv à un role
+    TRF ("Linked 2 site"),
+    CONF ("For mfe conf usage"),
+    GUI  ("For consulting usage")
+}
+/** More informations about users
+  * without changing nativ user "entity  
+*/
+entity UserAccount { // ! à poursuivre 
+    accountType AccountType required,
+    comment String ,
+    creationDate LocalDate required ,
+    lastUpdated LocalDate required 
+// à lier a businessaccount si GUI
+// à lier a site si TRF
+}
+
+/** state to determine the build 'deployement'
+  * status off some components (sites,flows,...)
+*/
+enum BuildState {
+    NOTBUILD, REQUIRED, BUILDING, BUILDERROR , BUILDED , TODESTROY , DESTROYED 
+}
+
+/** type on site determining 
+  * role of him in transfert usecase
+*/
+enum SiteType {
+    INT ("Application site"),
+    EXT ("External site"),
+    USR ("Site for users usage"),
+    NODE ("Site for monitor") 
+}
+
+entity Site {
+// ajouter une relation n,n buildscope avec businessunit
+	name String required,
+    siteType SiteType required, 
+    description String,
+    creationDate LocalDate required,
+    lastUpdated LocalDate required,
+    buildState BuildState,
+    buildCount Integer,
+    buildComment String
+}
+enum XRole {
+	CLI (client),
+    SRV (serveur)
+}
+enum XProtType {
+	PESITANY ("pesit cft"),
+    PESITSSL ("pesit ssl cft"),
+    SFTP (sftp)
+}
+
+entity XProt { // protocole de transfert 
+    xprotType XProtType required ,  
+    xRole XRole required,
+    comment String,
+    accessAddress String,
+    accessServicePoint Integer,
+    creationDate LocalDate required,
+    lastUpdated LocalDate required, 
+    buildState BuildState,
+    buildCount Integer,
+    buildComment String
+// à lier a businessaccount si GUI
+// à lier a site si TRF
+}
+/** type on site determining 
+  * role of him in transfert usecase
+*/
+enum FlowUseCase {
+    A2A ("Application to same application"),
+    A2B ("Application to other application"),
+    C2P ("Application to external site"),
+    P2C ("External site to application"),
+    A2U ("Application to user "),
+    U2A ("User to application"),
+    U2P ("User to external site "),
+    P2U ("External site to user") 
+}
+
+entity Flow {
+	// site or not site ?
+	fileIdent String required ,
+    flowUseCase FlowUseCase required,
+    description String ,
+    creationDate LocalDate required ,
+    lastUpdated LocalDate required ,
+    buildState BuildState ,
+    buildCount Integer ,
+    buildComment String
+}
+
+// ------------------ //
+// -- RELATIONSHIP -- //
+// ------------------ //
+
+relationship ManyToOne {
+    UserAccount{user(login) required} to User
+    Site{businessUnit(code) required } to BusinessUnit  // prevoir un multi
+    XProt{onNode(name)} to Site // avec un site de type node
+    Flow{businessUnit(code) required } to BusinessUnit  // A voir si liaison par sites sufissante
+    Flow{origin(name) required } to Site
+    Flow{destination(name) required } to Site
+}
+
+relationship ManyToMany {
+    UserAccount to BusinessUnit
+    UserAccount{sites(name)} to Site{accountedFor}
+}
+// ------------------ //
+// ----- OPTIONS ---- //
+// ------------------ //
+// Set pagination options
+paginate all with infinite-scroll
+paginate Site , Flow with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// ------------------ //
+// ---  SERVICES  --- //
+// ------------------ //
+// Set service options to all except few
+service all with serviceImpl  // except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
